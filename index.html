@@ -1,0 +1,147 @@
+<!-- Цель: Познакомиться с синтаксисом JS, базовыми конструкциями и логикой. 
+Задание: 
+Добавить на страницу скрипт (script.js), который реализует: 
+ Ввод/вывод: prompt (имя), alert (приветствие), console.log. 
+ Условные конструкции и циклы. 
+ Функции для поиска максимума, фильтрации и подсчёта суммы в массиве.
+Вариант 16. Тема «Предприниматель и стартапер» (выручка в день) Данные: массив 
+из 5–7 чисел – дневная выручка в рублях. Логика: фильтрация – дни с выручкой > 10 000 
+₽. Цикл – дни с низкой выручкой (≤ 3 000 ₽) и их доля. Функции: максимум, фильтрация, 
+сумма. Вывод: alert – «Общая выручка – X ₽, в Y днях показатели были высокими». 
+Console – доля дней с низкой выручкой и их количество. Доп.: если среднее < 5 000 ₽, 
+консоль – «Стоит проанализировать причины низкой выручки». -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Пашко Святослав">
+    <meta name="keywords" content="Предпринимательство, бизнес, ИП, Пашко, Святослав">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Пашко Святослав - Предприниматель и стартапер</title>
+    
+    <style>
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Гений, миллиардер, плейбой, филантроп!</h1>
+            <p>Чем занимаются предприниматели в наши дни?</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#about" style="cursor: pointer;">Обо мне</a></li>
+                <li><a href="#ideas" style="cursor: pointer;">Идеи стартапов</a></li>
+                <li><a href="#metrics" style="cursor: pointer;">Метрики</a></li>
+                <li><a href="#contact" style="cursor: pointer;">Контакты</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </header>
+    <main>
+        <section id="about">
+            <aside>
+                <div>
+                    <h2>Ключевые ценности подхода к бизнесу.</h2>
+                    <p><b>Инновации: </b>Создание новых технологий и продуктов, которые привлекают клиентов.</p>
+                    <p><b>Устойчивое развитие: </b>Применение экологически чистых методов управления.</p>
+                    <p><b>Командная работа: </b>Укрепление взаимодействия между сотрудниками.</p>
+                </div>
+            </aside>
+
+            <div>
+                <div class="photo-wrapper">
+                    <img src="images/MyPhoto2.jpg" alt="ПашкоСвятославЕвгеньевич" style="float: left; margin-right: 15px; border-radius: 5px;" width="200" height="250">
+                    <div class="status-badge">TOP FORBES</div>
+                </div>
+                
+                <p>Предприниматель из Томска, Пашко Святослав, вошел в первую 10-ку списка <a href="https://www.forbes.com/" style="cursor: pointer;"><b>Forbes</b></a>.</p>
+                <p>С каждым днем все больше людей пытаются открыть свое дело, но лишь единицы добиваются успеха.</p>
+                <p>Сегодня мы узнаем, на какие проекты стоит присмотреться!</p>
+            </div>
+            <div style="clear:left"></div>
+        </section>
+
+        <section id="ideas">
+            <h2>Идеи стартапов, которые стоит реализовать</h2>
+            <div class="ideas-container">
+                <article class="idea-card">
+                    <h3>AI-тренер по силовым видам спорта</h3>
+                    <p><b>Проблема:</b> Атлетам трудно контролировать время негативной фазы (например, удержание 8 секунд) и прогресс на больших весах (при переходе за 130 кг).</p>
+                    <p><b>Решение:</b> Мобильное приложение с компьютерным зрением для анализа амплитуды жима и тренировок по армрестлингу.</p>
+                </article>
+                <article class="idea-card">
+                    <h3>Хаб автомобильных прошивок</h3>
+                    <p><b>Проблема:</b> Русификация головных устройств японских автомобилей требует долгого поиска софта и инструкций.</p>
+                    <p><b>Решение:</b> Единый маркетплейс проверенных прошивок (например, для Bosch SLDA) с пошаговыми мануалами.</p>
+                </article>
+                <article class="idea-card">
+                    <h3>Облачная среда для C++</h3>
+                    <p><b>Проблема:</b> Студентам сложно локально настраивать окружение для работы с параллельным программированием (MPI).</p>
+                    <p><b>Решение:</b> Браузерная IDE с готовыми кластерами для высоконагруженных вычислений.</p>
+                </article>
+                <article class="idea-card">
+                    <h3>Генератор 2D ассетов</h3>
+                    <p><b>Проблема:</b> Инди-разработчикам не хватает качественных тайлсетов для игр с видом сверху.</p>
+                    <p><b>Решение:</b> Платформа на базе нейросетей, генерирующая графику в нужной стилистике по текстовому промпту.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="metrics">
+            <h2>Ключевые метрики (Dashboard)</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>MAU</h3>
+                    <p>Monthly Active Users (Активные пользователи)</p>
+                    <meter min="0" max="10000" value="8500" low="3000" high="7000" optimum="9000" title="8500 пользователей"></meter>
+                    <p class="metric-value">8,500 / 10,000</p>
+                    <div class="graph-placeholder" style="background: linear-gradient(to top right, #3498db, #2980b9);">График роста</div>
+                </div>
+                <div class="metric-card">
+                    <h3>LTV</h3>
+                    <p>Lifetime Value (Доход с клиента)</p>
+                    <meter min="0" max="100" value="75" low="30" high="80" optimum="90" title="$75"></meter>
+                    <p class="metric-value">$75</p>
+                    <div class="graph-placeholder" style="background: linear-gradient(to top right, #2ecc71, #27ae60);">Когортный анализ</div>
+                </div>
+                <div class="metric-card">
+                    <h3>CAC</h3>
+                    <p>Customer Acquisition Cost (Стоимость привлечения)</p>
+                    <meter min="0" max="50" value="15" low="10" high="40" optimum="5" title="$15"></meter>
+                    <p class="metric-value">$15</p>
+                    <div class="graph-placeholder" style="background: linear-gradient(to top right, #e74c3c, #c0392b);">Динамика затрат</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="form-title">
+                <h2>Оставьте свое мнение:</h2>
+            </div>
+            <form action="#" method="post" class="startup-form">
+                <input type="text" name="name" placeholder="Ваше имя" style="cursor: pointer;" required>
+                <input type="email" name="email" placeholder="Ваш Email" style="cursor: pointer;" required>
+                <textarea name="message" placeholder="Ваше сообщение" style="cursor: pointer;" required></textarea>
+                <button type="submit" class="bait-btn" style="cursor: pointer;">Отправить стартап-идею!</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <hr>
+        <p>Copyright © 2026. <a href="#" style="cursor: pointer;">PashkoSvyat.com</a></p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
