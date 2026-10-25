@@ -1,9 +1,12 @@
 let userName = prompt("Введите ваше имя, предприниматель:", "Святослав");
-if (userName) {
-    alert("Приветствую, " + userName + "! Добро пожаловать на аналитический дашборд стартапа.");
+
+if (userName && userName.trim() !== "") {
+    alert("Приветствую, " + userName.trim() + "! Добро пожаловать на аналитический дашборд.");
+} else {
+    alert("Приветствую, Гость! Добро пожаловать на аналитический дашборд.");
 }
 
-let dailyRevenues = [12500, 2800, 14200, 3000, 9500, 1900, 18500];
+let dailyRevenues = [12000, 1000, 1500, 1000, 2500, 1000, 1000];
 
 console.log("=== ДАННЫЕ СТАРТАПА ===");
 console.log("Дневная выручка по дням:", dailyRevenues);
@@ -36,31 +39,35 @@ function filterRevenue(arr, threshold) {
     return filtered;
 }
 
-let totalRevenue = calculateSum(dailyRevenues);
-let maxRevenue = findMax(dailyRevenues);
+function analyzeStartup(revenueArr) {
+    let totalRevenue = calculateSum(revenueArr);
+    let maxRevenue = findMax(revenueArr);
+    let averageRevenue = totalRevenue / revenueArr.length;
 
-let highRevenueDays = filterRevenue(dailyRevenues, 10000);
-let highDaysCount = highRevenueDays.length;
+    let highRevenueDays = filterRevenue(revenueArr, 10000);
+    let highDaysCount = highRevenueDays.length;
 
-let lowRevenueCount = 0;
-for (let i = 0; i < dailyRevenues.length; i++) {
-    if (dailyRevenues[i] <= 3000) {
-        lowRevenueCount++;
+    let lowRevenueCount = 0;
+    for (let i = 0; i < revenueArr.length; i++) {
+        if (revenueArr[i] <= 3000) {
+            lowRevenueCount++;
+        }
+    }
+    
+    let lowRevenueShare = (lowRevenueCount / revenueArr.length) * 100;
+
+    alert("Общая выручка – " + totalRevenue + " ₽, в " + highDaysCount + " днях показатели были высокими.");
+
+    console.log("Количество дней с низкой выручкой: " + lowRevenueCount);
+    console.log("Доля дней с низкой выручкой: " + lowRevenueShare.toFixed(1) + "%");
+    console.log("Максимальная дневная выручка: " + maxRevenue + " ₽");
+    console.log("Средняя дневная выручка: " + averageRevenue.toFixed(2) + " ₽");
+
+    if (averageRevenue < 5000) {
+        console.log("Стоит проанализировать причины низкой выручки");
+    } else {
+        console.log("Показатели в норме, средняя выручка выше целевого порога.");
     }
 }
-let lowRevenueShare = (lowRevenueCount / dailyRevenues.length) * 100;
 
-let averageRevenue = totalRevenue / dailyRevenues.length;
-
-alert("Общая выручка – " + totalRevenue + " ₽, в " + highDaysCount + " днях показатели были высокими.");
-
-console.log("Количество дней с низкой выручкой (<= 3000 ₽): " + lowRevenueCount);
-console.log("Доля дней с низкой выручкой: " + lowRevenueShare.toFixed(1) + "% от общего числа дней.");
-
-if (averageRevenue < 5000) {
-    console.warn("Стоит проанализировать причины низкой выручки (Средняя выручка: " + averageRevenue.toFixed(2) + " ₽).");
-} else {
-    console.log("Средняя выручка составляет " + averageRevenue.toFixed(2) + " ₽. Бизнес-модель стабильна!");
-}
-
-console.log("Максимальная дневная выручка: " + maxRevenue + " ₽");
+analyzeStartup(dailyRevenues);
